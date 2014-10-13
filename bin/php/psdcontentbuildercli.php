@@ -353,8 +353,8 @@ class psdContentBuilderCLI
 
         $ini = eZINI::instance('psdcontentbuilder.ini');
 
-        if ($ini->hasVariable('ContentBuilderSettings', 'FixturesDirectory')) {
-            $path = $ini->variable('ContentBuilderSettings', 'FixturesDirectory');
+        if ($ini->hasVariable('ContentBuilderSettings', 'DefaultImportPattern')) {
+            $path = $ini->variable('ContentBuilderSettings', 'DefaultImportPattern');
         }
 
         return $path;
