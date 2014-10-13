@@ -90,7 +90,7 @@ class psdContentBuilderCLI
             $this->arguments = getopt(
                 '',
                 array(
-                    'apply:',
+                    'apply::',
                     'remove:',
                     'siteaccess:',
                     'verbose::',
@@ -194,6 +194,10 @@ class psdContentBuilderCLI
 
         if (is_array($this->arguments) && array_key_exists('apply', $this->arguments)) {
             $pattern = $this->arguments['apply'];
+        }
+
+        if (empty($pattern)) {
+            $pattern = $this->getPathFromIni();
         }
 
         if (empty($pattern)) {
@@ -335,6 +339,25 @@ class psdContentBuilderCLI
 
         $this->cli->output($str, true);
 
+    }
+
+
+    /**
+     * Get path from ini.
+     *
+     * @return string Path
+     */
+    protected function getPathFromIni()
+    {
+        $path = '';
+
+        $ini = eZINI::instance('psdcontentbuilder.ini');
+
+        if ($ini->hasVariable('ContentBuilderSettings', 'FixturesDirectory')) {
+            $path = $ini->variable('ContentBuilderSettings', 'FixturesDirectory');
+        }
+
+        return $path;
     }
 
 
