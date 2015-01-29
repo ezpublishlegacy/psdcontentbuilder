@@ -509,7 +509,7 @@ class psdNodeBuilder
                     continue;
                 }
 
-                $fields->$property = $value;
+                $fields->$property = trim($value);
             }
 
         }
