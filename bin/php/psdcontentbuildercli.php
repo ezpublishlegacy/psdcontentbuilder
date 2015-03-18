@@ -107,6 +107,8 @@ class psdContentBuilderCLI
             $this->verbose = array_key_exists('verbose', $this->arguments);
         }
 
+        $this->cli->setIsQuiet(!$this->verbose);
+
         try {
             if ($this->initScript()) {
 
