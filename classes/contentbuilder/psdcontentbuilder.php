@@ -346,7 +346,7 @@ class psdContentBuilder
         if (is_numeric($location)) {
 
             // Node-ID.
-            return eZContentObjectTreeNode::fetch((int) $location);
+            return psdUtilsFunctionCollection::fetchCachedNode((int) $location);
 
         } elseif (is_string($location) && substr($location, 0, 1) === '/') {
 
@@ -360,7 +360,7 @@ class psdContentBuilder
             // Path-String.
             if (!($node instanceof eZContentObjectTreeNode)) {
                 $node_id = (int) eZURLAliasML::fetchNodeIDByPath($location);
-                $node    = eZContentObjectTreeNode::fetch($node_id);
+                $node    = psdUtilsFunctionCollection::fetchCachedNode($node_id);
             }
 
             if (!($node instanceof eZContentObjectTreeNode)) {
@@ -431,7 +431,7 @@ class psdContentBuilder
 
         $currentUserId = (int) eZUser::currentUserID();
 
-        $parentNode = eZContentObjectTreeNode::fetch($nodeId);
+        $parentNode = psdUtilsFunctionCollection::fetchCachedNode($nodeId);
 
         foreach ($parts as $part) {
             $location .= $part.'/';
@@ -439,7 +439,7 @@ class psdContentBuilder
 
             // Node exists, skip here.
             if ($nodeId !== false) {
-                $parentNode = eZContentObjectTreeNode::fetch($nodeId);
+                $parentNode = psdUtilsFunctionCollection::fetchCachedNode($nodeId);
                 continue;
             }
 
