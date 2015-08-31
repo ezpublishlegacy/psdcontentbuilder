@@ -146,6 +146,10 @@ class psdNodeBuilder
             throw new psdContentBuilderValidationException('Invalid structure, must be an array.');
         }
 
+        $eZFindIni = eZINI::instance('ezfind.ini');
+        $previous = $eZFindIni->variable('IndexOptions', 'DisableDirectCommits');
+        $eZFindIni->setVariable('IndexOptions', 'DisableDirectCommits', 'true');
+
         $this->searchEngine = new eZSolr();
         $this->structure = $structure;
 
@@ -159,6 +163,8 @@ class psdNodeBuilder
             $this->contentBuilder->execPath->pop();
 
         }
+
+        $eZFindIni->setVariable('IndexOptions', 'DisableDirectCommits', $previous);
 
         $this->searchEngine->commit();
 
