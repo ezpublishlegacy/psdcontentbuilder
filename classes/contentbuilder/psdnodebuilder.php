@@ -518,7 +518,7 @@ class psdNodeBuilder
         // Only add new locations in order to catch warnings on existing ones.
         $location = \SQLILocation::fromNodeID($locationNode->attribute('node_id'));
         if (!self::contentHasLocation($location, $content)) {
-            $content->addLocation($location, $content);
+            $content->addLocation($location);
         }
 
         $object = $content->getRawContentObject();
