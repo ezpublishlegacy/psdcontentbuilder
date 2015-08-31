@@ -115,7 +115,7 @@ class psdContentBuilderCLI
                 // Test if database is empty.
                 $db = eZDB::instance();
                 eZDB::setErrorHandling(eZDB::ERROR_HANDLING_EXCEPTIONS);
-                $db->arrayQuery('SELECT * FROM ezcontentclass');
+                $db->arrayQuery('DESCRIBE ezcontentclass');
 
             }
         } catch (eZDBNoConnectionException $e) {
