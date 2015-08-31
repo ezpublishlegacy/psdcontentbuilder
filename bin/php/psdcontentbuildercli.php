@@ -208,13 +208,13 @@ class psdContentBuilderCLI
 
         $files = glob($pattern);
 
+        $builder = new psdContentBuilder();
+
+        $builder->verbose = $this->verbose;
+        $builder->logLineCallback = array($this, 'logLine');
+
         foreach ($files as $file) {
             $this->logLine('Applying structure to content-tree: '.$file, __METHOD__);
-
-            $builder = new psdContentBuilder();
-
-            $builder->verbose = $this->verbose;
-            $builder->logLineCallback = array($this, 'logLine');
 
             $builder->loadFromFile($file);
             $builder->apply();
