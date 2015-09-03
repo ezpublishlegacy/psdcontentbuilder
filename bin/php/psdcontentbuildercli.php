@@ -115,7 +115,7 @@ class psdContentBuilderCLI
                 // Test if database is empty.
                 $db = eZDB::instance();
                 eZDB::setErrorHandling(eZDB::ERROR_HANDLING_EXCEPTIONS);
-                $db->arrayQuery('SELECT * FROM ezcontentclass');
+                $db->arrayQuery('DESCRIBE ezcontentclass');
 
             }
         } catch (eZDBNoConnectionException $e) {
@@ -208,13 +208,13 @@ class psdContentBuilderCLI
 
         $files = glob($pattern);
 
+        $builder = new psdContentBuilder();
+
+        $builder->verbose = $this->verbose;
+        $builder->logLineCallback = array($this, 'logLine');
+
         foreach ($files as $file) {
             $this->logLine('Applying structure to content-tree: '.$file, __METHOD__);
-
-            $builder = new psdContentBuilder();
-
-            $builder->verbose = $this->verbose;
-            $builder->logLineCallback = array($this, 'logLine');
 
             $builder->loadFromFile($file);
             $builder->apply();

@@ -146,6 +146,10 @@ class psdNodeBuilder
             throw new psdContentBuilderValidationException('Invalid structure, must be an array.');
         }
 
+        $eZFindIni = eZINI::instance('ezfind.ini');
+        $previous = $eZFindIni->variable('IndexOptions', 'DisableDirectCommits');
+        $eZFindIni->setVariable('IndexOptions', 'DisableDirectCommits', 'true');
+
         $this->searchEngine = new eZSolr();
         $this->structure = $structure;
 
@@ -159,6 +163,8 @@ class psdNodeBuilder
             $this->contentBuilder->execPath->pop();
 
         }
+
+        $eZFindIni->setVariable('IndexOptions', 'DisableDirectCommits', $previous);
 
         $this->searchEngine->commit();
 
@@ -516,9 +522,9 @@ class psdNodeBuilder
 
 
         // Only add new locations in order to catch warnings on existing ones.
-        $location = \SQLILocation::fromNodeID($locationNode->attribute('node_id'));
+        $location = \SQLILocation::fromNode($locationNode);
         if (!self::contentHasLocation($location, $content)) {
-            $content->addLocation($location, $content);
+            $content->addLocation($location);
         }
 
         $object = $content->getRawContentObject();

@@ -76,7 +76,7 @@ class psdContentBuilder
     /**
      * Holds an external logline callback. Must accept 2 string-parameters.
      *
-     * @var void
+     * @var callback|array
      */
     public $logLineCallback;
 
@@ -542,7 +542,7 @@ class psdContentBuilder
     {
 
         if (is_callable($this->logLineCallback)) {
-            $this->logLineCallback($str, $method);
+            call_user_func($this->logLineCallback, $str, $method);
 
             return;
         }
