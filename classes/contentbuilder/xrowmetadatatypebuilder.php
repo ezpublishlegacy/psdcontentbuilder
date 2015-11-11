@@ -14,15 +14,17 @@ class xrowMetaDataTypeBuilder extends psdAbstractDatatypeBuilder
      * @var array
      */
     protected $fields = array(
-        'title'       => '',
-        'keywords'    => array(),
-        'description' => '',
-        'priority'    => '',
-        'change'      => '',
-        'googlemap'   => '',
-        'canonical'   => '',
-        'robots'      => '',
-        'extraMeta'   => '',
+        'title'         => '',
+        'keywords'      => array(),
+        'description'   => '',
+        'priority'      => '',
+        'change'        => '',
+        'googlemap'     => '',
+        'canonical'     => '',
+        'robots'        => '',
+        'extraMeta'     => '',
+        'fbTitle'       => '',
+        'fbDescription' => '',
     );
 
 
